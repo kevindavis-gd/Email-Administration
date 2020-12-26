@@ -7,11 +7,15 @@ public class Email {
 	private String lastName;
 	private String password;
 	private String department;
+	private String email;
+	private String companySuffix = "cummins.com";
 	private String alternateEmail;
-	private int mailboxCapacity;
+	private int mailboxCapacity = 500;
 	private int defaultPasswordLength = 128;
-
-	public Email(String firstName, String lastName) {
+	
+	//********************************************Constructor**********************************************
+	public Email(String firstName, String lastName) 
+	{
 		this.firstName = firstName;
 		this.lastName = lastName;
 		
@@ -24,9 +28,17 @@ public class Email {
 		System.out.println("Department: " + this.department);
 		this.password = randomPassword(defaultPasswordLength);
 		System.out.println("Your Password is: " + this.password);
+		email = firstName.toLowerCase() 
+				+ "." 
+				+ lastName.toLowerCase() 
+				+ "@" +department 
+				+ "."
+				+ companySuffix;
+		
+		System.out.println("Your Email is: " + this.email);
 	}
 	
-	//***************************set department**************************
+	//*******************************************set department******************************************
 	//method that allows user to select department
 	private String setDepartment() {
 		// ask user to select their department
@@ -40,17 +52,21 @@ public class Email {
 		// store user choice in variable
 		int depChoice = in.nextInt();
 		
-		if (depChoice == 1) {
+		if (depChoice == 1) 
+		{
 			return "sales";
-		} else if (depChoice == 2) {
+		} else if (depChoice == 2) 
+		{
 			return "dev";
-		} else if (depChoice == 3) {
+		} else if (depChoice == 3) 
+		{
 			return "acct";
 		} else {
 			return "";
 		}
 	}//end setDepartment
 	
+	//****************************************random password ********************************************
 	private String randomPassword(int length)
 	{
 		String passwordSet ="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*";
@@ -63,5 +79,31 @@ public class Email {
 			password[i]=passwordSet.charAt(rand);
 		}
 		return new String(password);
+	}//end random Password
+	//************************************Setters******************************
+	public void setMailboxCapacity(int capacity)
+	{
+		this.mailboxCapacity = capacity;
+	}
+	public void setAlternateEmail(String email)
+	{
+		this.alternateEmail = email;
+	}
+	public void changePassword(String pass)
+	{
+		this.password = pass;
+	}
+	//************************************Getters******************************
+	public int getMailboxCapacity()
+	{
+		return this.mailboxCapacity;
+	}
+	public String getAlternateEmail()
+	{
+		return this.alternateEmail;
+	}
+	public String getPassword()
+	{
+		return this.password;
 	}
 }
